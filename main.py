@@ -49,10 +49,9 @@ async def read_root():
 @token_app.get("/generate-token")
 async def generate_token(client_id: int, client_name: str, extra_dummy: str,
                          expiration: int, binary_dummy: int = Query(1, enum=[1, 0])):
-
-    assert (expiration > 0 and expiration <= 3), \
-        'Máximo 3 horas. El valor de expiration debe estar entre 1 y 3.'
     try:
+        assert (expiration > 0 and expiration <= 3), \
+            'Máximo 3 horas. El valor de expiration debe estar entre 1 y 3.'
         payload = {
             'data': {'client_id': client_id, 'client_name': client_name, 'extra_dummy': extra_dummy,
                      'binary_dummy': binary_dummy},
