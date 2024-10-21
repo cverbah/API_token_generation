@@ -49,15 +49,15 @@ async def read_root():
 
 
 @token_app.get("/generate-token")
-async def generate_token(client_id: int, client_name: str, extra_dummy: str,
+async def generate_token(client_id: int, client_name: str, user_reference_id: str,
                          expiration: int = Query(1, enum=[10, 20, 30], description='tiempo de expiracion en minutos'),
-                         binary_dummy: int = Query(1, enum=[1, 0])):
+                         ):
     try:
         # generates an encoded token based on a client id and client name with an expiration time in [1,3] hours
         # The dummy parameters can be deleted
         payload = {
-            'data': {'client_id': client_id, 'client_name': client_name, 'extra_dummy': extra_dummy,
-                     'binary_dummy': binary_dummy},
+            'data': {'client_id': client_id, 'client_name': client_name, 'user_reference_id': user_reference_id,
+                     },
             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=expiration)  # Token expiration time
         }
         # secret key can be modified, but it is needed for decoding
