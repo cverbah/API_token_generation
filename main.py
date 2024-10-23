@@ -50,7 +50,7 @@ async def read_root():
 
 @token_app.get("/generate-token")
 async def generate_token(client_id: int, client_name: str, user_reference_id: str,
-                         expiration: int = Query(1, enum=[10, 20, 30], description='tiempo de expiracion en minutos'),
+                         expiration: int = Query(10, enum=[10, 20, 30], description='tiempo de expiracion en minutos'),
                          ):
     try:
         # generates an encoded token based on a client id and client name with an expiration time in [1,3] hours
